@@ -1,0 +1,26 @@
+[package]
+name = "pallet-assets"
+version = "0.1.0"
+edition = "2018"
+authors = ["Your Name <your-email@example.com>"]
+description = "Manage assets"
+license = "Unlicense/MIT"
+
+[dependencies]
+sp-core = { version = "4.0.0-dev", default-features = false }
+frame-support = { version = "4.0.0-dev", default-features = false, features = ["std"] }
+frame-system = { version = "4.0.0-dev", default-features = false, features = ["std"] }
+pallet-balances = { version = "4.0.0-dev", default-features = false, features = ["std"] }
+
+[features]
+default = ["std"]
+std = [
+    "sp-core/std",
+    "frame-support/std",
+    "frame-system/std",
+    "pallet-balances/std",
+    'pallet-assets/std',
+]
+runtime-benchmarks = [
+    'pallet-assets/std/runtime-benchmarks',
+]
