@@ -1,7 +1,3 @@
-For a GitHub project involving a DeFi protocol similar to Compound using Substrate, a comprehensive README file is crucial. It serves not only as the first introduction to anyone exploring or using your project but also as a guide to help developers understand and contribute to your project. Below, I will outline a detailed README structure for your project, which includes `pallet_assets`, `pallet_interest`, and `pallet_lending`.
-
-### README.md
-
 ```markdown
 # Substrate DeFi Protocol - Compound Clone
 
