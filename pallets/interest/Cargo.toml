@@ -1,9 +1,9 @@
 [package]
-name = "pallet-assets"
+name = "pallet-interest"
 version = "0.1.0"
 edition = "2018"
 authors = ["Your Name <your-email@example.com>"]
-description = "Manage assets"
+description = "Manage interest"
 license = "Unlicense/MIT"
 
 [dependencies]
@@ -19,8 +19,6 @@ std = [
     "frame-support/std",
     "frame-system/std",
     "pallet-balances/std",
-    'pallet-assets/std',
 ]
-runtime-benchmarks = [
-    'pallet-assets/std/runtime-benchmarks',
-]
+
+runtime-benchmarks = []

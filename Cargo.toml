@@ -9,6 +9,9 @@ homepage = "https://substrate.io"
 members = [
     "node",
     "pallets/template",
+    "pallets/assets",
+    "pallets/interest",
+    "pallets/lending",
     "runtime",
 ]
 resolver = "2"

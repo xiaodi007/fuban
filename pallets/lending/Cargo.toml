@@ -19,9 +19,6 @@ std = [
     "frame-support/std",
     "frame-system/std",
     "pallet-balances/std",
-    "pallet-lending/std",
 ]
 
-runtime-benchmarks = [
-    'pallet-lending/std/runtime-benchmarks',
-]
+runtime-benchmarks = []
