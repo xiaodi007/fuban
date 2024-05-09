@@ -456,7 +456,7 @@ dependencies = [
  "ark-serialize",
  "ark-std",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
 ]
 
 [[package]]
@@ -954,7 +954,7 @@ checksum = "d32385ecb91a31bddaf908e8dcf4a15aef1bcd3913cc03ebfad02ff6d568abc1"
 dependencies = [
  "log",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 1.0.0",
  "serde",
 ]
 
@@ -2395,7 +2395,7 @@ dependencies = [
  "num-traits",
  "parity-scale-codec 3.6.9",
  "parking_lot 0.12.1",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
 ]
 
 [[package]]
@@ -2489,7 +2489,7 @@ dependencies = [
  "log",
  "parity-scale-codec 3.6.9",
  "paste",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "serde",
  "sp-api 4.0.0",
  "sp-application-crypto 8.0.0",
@@ -2513,7 +2513,7 @@ dependencies = [
  "log",
  "parity-scale-codec 3.6.9",
  "paste",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "serde",
  "sp-api 26.0.0",
  "sp-application-crypto 30.0.0",
@@ -2585,7 +2585,7 @@ dependencies = [
  "frame-try-runtime",
  "log",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "sp-core 28.0.0",
  "sp-io 30.0.0",
  "sp-runtime 31.0.1",
@@ -2601,7 +2601,7 @@ checksum = "878babb0b136e731cc77ec2fd883ff02745ff21e6fb662729953d44923df009c"
 dependencies = [
  "cfg-if",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "serde",
 ]
 
@@ -2613,7 +2613,7 @@ checksum = "87cf1549fba25a6fcac22785b61698317d958e96cac72a59102ea45b9ae64692"
 dependencies = [
  "cfg-if",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "serde",
 ]
 
@@ -2654,7 +2654,7 @@ dependencies = [
  "once_cell",
  "parity-scale-codec 3.6.9",
  "paste",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "serde",
  "smallvec",
  "sp-api 4.0.0",
@@ -2690,7 +2690,7 @@ dependencies = [
  "macro_magic",
  "parity-scale-codec 3.6.9",
  "paste",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "serde",
  "serde_json",
  "smallvec",
@@ -2802,7 +2802,7 @@ dependencies = [
  "frame-support 4.0.0",
  "log",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "serde",
  "sp-core 8.0.0",
  "sp-io 8.0.0",
@@ -2822,7 +2822,7 @@ dependencies = [
  "frame-support 28.0.0",
  "log",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "serde",
  "sp-core 28.0.0",
  "sp-io 30.0.0",
@@ -2841,7 +2841,7 @@ dependencies = [
  "frame-support 28.0.0",
  "frame-system 28.0.0",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "sp-core 28.0.0",
  "sp-runtime 31.0.1",
  "sp-std 14.0.0 (git+https://github.com/paritytech/polkadot-sdk.git?tag=polkadot-v1.9.0)",
@@ -5183,7 +5183,7 @@ dependencies = [
  "pallet-transaction-payment",
  "pallet-transaction-payment-rpc-runtime-api",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "sp-api 26.0.0",
  "sp-block-builder",
  "sp-consensus-aura",
@@ -5435,7 +5435,7 @@ dependencies = [
  "log",
  "pallet-timestamp",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "sp-application-crypto 30.0.0",
  "sp-consensus-aura",
  "sp-runtime 31.0.1",
@@ -5451,7 +5451,7 @@ dependencies = [
  "frame-system 28.0.0",
  "impl-trait-for-tuples",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "sp-runtime 31.0.1",
  "sp-std 14.0.0 (git+https://github.com/paritytech/polkadot-sdk.git?tag=polkadot-v1.9.0)",
 ]
@@ -5467,7 +5467,7 @@ dependencies = [
  "frame-system 4.0.0",
  "log",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "sp-runtime 8.0.0",
  "sp-std 6.0.0",
 ]
@@ -5483,7 +5483,7 @@ dependencies = [
  "frame-system 28.0.0",
  "log",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "sp-runtime 31.0.1",
  "sp-std 14.0.0 (git+https://github.com/paritytech/polkadot-sdk.git?tag=polkadot-v1.9.0)",
 ]
@@ -5500,7 +5500,7 @@ dependencies = [
  "pallet-authorship",
  "pallet-session",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "sp-application-crypto 30.0.0",
  "sp-consensus-grandpa",
  "sp-core 28.0.0",
@@ -5542,7 +5542,7 @@ dependencies = [
  "log",
  "pallet-timestamp",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "sp-core 28.0.0",
  "sp-io 30.0.0",
  "sp-runtime 31.0.1",
@@ -5563,7 +5563,7 @@ dependencies = [
  "frame-support 28.0.0",
  "frame-system 28.0.0",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "sp-io 30.0.0",
  "sp-runtime 31.0.1",
  "sp-std 14.0.0 (git+https://github.com/paritytech/polkadot-sdk.git?tag=polkadot-v1.9.0)",
@@ -5577,7 +5577,7 @@ dependencies = [
  "frame-support 28.0.0",
  "frame-system 28.0.0",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "sp-core 28.0.0",
  "sp-io 30.0.0",
  "sp-runtime 31.0.1",
@@ -5594,7 +5594,7 @@ dependencies = [
  "frame-system 28.0.0",
  "log",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "sp-inherents 26.0.0",
  "sp-io 30.0.0",
  "sp-runtime 31.0.1",
@@ -5611,7 +5611,7 @@ dependencies = [
  "frame-support 28.0.0",
  "frame-system 28.0.0",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "serde",
  "sp-core 28.0.0",
  "sp-io 30.0.0",
@@ -6274,7 +6274,7 @@ dependencies = [
  "fixed-hash 0.8.0",
  "impl-codec 0.6.0",
  "impl-serde 0.4.0",
- "scale-info 2.10.0",
+ "scale-info 1.0.0",
  "uint",
 ]
 
@@ -7870,7 +7870,7 @@ dependencies = [
  "sc-chain-spec",
  "sc-mixnet",
  "sc-transaction-pool-api",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "serde",
  "serde_json",
  "sp-core 28.0.0",
@@ -8158,15 +8158,15 @@ dependencies = [
 
 [[package]]
 name = "scale-info"
-version = "2.10.0"
+version = "2.11.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7f7d66a1128282b7ef025a8ead62a4a9fcf017382ec53b8ffbf4d7bf77bd3c60"
+checksum = "eca070c12893629e2cc820a9761bedf6ce1dcddc9852984d1dc734b8bd9bd024"
 dependencies = [
  "bitvec 1.0.1",
  "cfg-if",
  "derive_more",
  "parity-scale-codec 3.6.9",
- "scale-info-derive 2.10.0",
+ "scale-info-derive 2.11.3",
  "serde",
 ]
 
@@ -8184,11 +8184,11 @@ dependencies = [
 
 [[package]]
 name = "scale-info-derive"
-version = "2.10.0"
+version = "2.11.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "abf2c68b89cafb3b8d918dd07b42be0da66ff202cf1155c5739a4e0c1ea0dc19"
+checksum = "2d35494501194174bda522a32605929eefc9ecf7e0a326c26db1fdd85881eb62"
 dependencies = [
- "proc-macro-crate 1.1.3",
+ "proc-macro-crate 3.1.0",
  "proc-macro2",
  "quote",
  "syn 1.0.109",
@@ -8701,7 +8701,7 @@ dependencies = [
  "hash-db 0.16.0",
  "log",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "sp-api-proc-macro 15.0.0",
  "sp-core 28.0.0",
  "sp-externalities 0.25.0 (git+https://github.com/paritytech/polkadot-sdk.git?tag=polkadot-v1.9.0)",
@@ -8749,7 +8749,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b6f13d58fdde9872787976bd5d911b1ca7dacabed098b8e6ef99462d071b29d3"
 dependencies = [
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "serde",
  "sp-core 8.0.0",
  "sp-io 8.0.0",
@@ -8762,7 +8762,7 @@ version = "30.0.0"
 source = "git+https://github.com/paritytech/polkadot-sdk.git?tag=polkadot-v1.9.0#3c3d6fceb82372a3019b37117aa453d564b212de"
 dependencies = [
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "serde",
  "sp-core 28.0.0",
  "sp-io 30.0.0",
@@ -8778,7 +8778,7 @@ dependencies = [
  "integer-sqrt",
  "num-traits",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "serde",
  "sp-debug-derive 6.0.0",
  "sp-std 6.0.0",
@@ -8793,7 +8793,7 @@ dependencies = [
  "integer-sqrt",
  "num-traits",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "serde",
  "sp-std 14.0.0 (git+https://github.com/paritytech/polkadot-sdk.git?tag=polkadot-v1.9.0)",
  "static_assertions",
@@ -8868,7 +8868,7 @@ source = "git+https://github.com/paritytech/polkadot-sdk.git?tag=polkadot-v1.9.0
 dependencies = [
  "async-trait",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "sp-api 26.0.0",
  "sp-application-crypto 30.0.0",
  "sp-consensus-slots",
@@ -8885,7 +8885,7 @@ source = "git+https://github.com/paritytech/polkadot-sdk.git?tag=polkadot-v1.9.0
 dependencies = [
  "async-trait",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "serde",
  "sp-api 26.0.0",
  "sp-application-crypto 30.0.0",
@@ -8905,7 +8905,7 @@ dependencies = [
  "finality-grandpa",
  "log",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "serde",
  "sp-api 26.0.0",
  "sp-application-crypto 30.0.0",
@@ -8921,7 +8921,7 @@ version = "0.32.0"
 source = "git+https://github.com/paritytech/polkadot-sdk.git?tag=polkadot-v1.9.0#3c3d6fceb82372a3019b37117aa453d564b212de"
 dependencies = [
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "serde",
  "sp-std 14.0.0 (git+https://github.com/paritytech/polkadot-sdk.git?tag=polkadot-v1.9.0)",
  "sp-timestamp",
@@ -9003,7 +9003,7 @@ dependencies = [
  "primitive-types 0.12.2",
  "rand 0.7.3",
  "regex",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "schnorrkel 0.9.1",
  "secp256k1 0.24.3",
  "secrecy",
@@ -9050,7 +9050,7 @@ dependencies = [
  "paste",
  "primitive-types 0.12.2",
  "rand 0.8.5",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "schnorrkel 0.11.4",
  "secp256k1 0.28.2",
  "secrecy",
@@ -9306,7 +9306,7 @@ dependencies = [
  "async-trait",
  "impl-trait-for-tuples",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "sp-runtime 31.0.1",
  "sp-std 14.0.0 (git+https://github.com/paritytech/polkadot-sdk.git?tag=polkadot-v1.9.0)",
  "thiserror",
@@ -9420,7 +9420,7 @@ source = "git+https://github.com/paritytech/polkadot-sdk.git?tag=polkadot-v1.9.0
 dependencies = [
  "frame-metadata 16.0.0",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "sp-std 14.0.0 (git+https://github.com/paritytech/polkadot-sdk.git?tag=polkadot-v1.9.0)",
 ]
 
@@ -9430,7 +9430,7 @@ version = "0.4.0"
 source = "git+https://github.com/paritytech/polkadot-sdk.git?tag=polkadot-v1.9.0#3c3d6fceb82372a3019b37117aa453d564b212de"
 dependencies = [
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "sp-api 26.0.0",
  "sp-application-crypto 30.0.0",
  "sp-std 14.0.0 (git+https://github.com/paritytech/polkadot-sdk.git?tag=polkadot-v1.9.0)",
@@ -9490,7 +9490,7 @@ dependencies = [
  "parity-scale-codec 3.6.9",
  "paste",
  "rand 0.7.3",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "serde",
  "sp-application-crypto 8.0.0",
  "sp-arithmetic 7.0.0",
@@ -9513,7 +9513,7 @@ dependencies = [
  "parity-scale-codec 3.6.9",
  "paste",
  "rand 0.8.5",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "serde",
  "simple-mermaid",
  "sp-application-crypto 30.0.0",
@@ -9657,7 +9657,7 @@ version = "27.0.0"
 source = "git+https://github.com/paritytech/polkadot-sdk.git?tag=polkadot-v1.9.0#3c3d6fceb82372a3019b37117aa453d564b212de"
 dependencies = [
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "sp-api 26.0.0",
  "sp-core 28.0.0",
  "sp-keystore 0.34.0",
@@ -9673,7 +9673,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a84c9a790241612d8153077cf4cd06f57ced8824629c911e394a9726af222b76"
 dependencies = [
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "sp-core 8.0.0",
  "sp-runtime 8.0.0",
  "sp-std 6.0.0",
@@ -9686,7 +9686,7 @@ source = "git+https://github.com/paritytech/polkadot-sdk.git?tag=polkadot-v1.9.0
 dependencies = [
  "impl-trait-for-tuples",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "serde",
  "sp-core 28.0.0",
  "sp-runtime 31.0.1",
@@ -9748,7 +9748,7 @@ dependencies = [
  "hkdf",
  "parity-scale-codec 3.6.9",
  "rand 0.8.5",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "sha2 0.10.8",
  "sp-api 26.0.0",
  "sp-application-crypto 30.0.0",
@@ -9935,7 +9935,7 @@ source = "git+https://github.com/paritytech/polkadot-sdk.git?tag=polkadot-v1.9.0
 dependencies = [
  "async-trait",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "sp-core 28.0.0",
  "sp-inherents 26.0.0",
  "sp-runtime 31.0.1",
@@ -9958,7 +9958,7 @@ dependencies = [
  "nohash-hasher",
  "parity-scale-codec 3.6.9",
  "parking_lot 0.12.1",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "sp-core 8.0.0",
  "sp-std 6.0.0",
  "thiserror",
@@ -9980,7 +9980,7 @@ dependencies = [
  "parity-scale-codec 3.6.9",
  "parking_lot 0.12.1",
  "rand 0.8.5",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "schnellru",
  "sp-core 28.0.0",
  "sp-externalities 0.25.0 (git+https://github.com/paritytech/polkadot-sdk.git?tag=polkadot-v1.9.0)",
@@ -10000,7 +10000,7 @@ dependencies = [
  "impl-serde 0.4.0",
  "parity-scale-codec 3.6.9",
  "parity-wasm 0.45.0",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "serde",
  "sp-core-hashing-proc-macro",
  "sp-runtime 8.0.0",
@@ -10017,7 +10017,7 @@ dependencies = [
  "impl-serde 0.4.0",
  "parity-scale-codec 3.6.9",
  "parity-wasm 0.45.0",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "serde",
  "sp-crypto-hashing-proc-macro",
  "sp-runtime 31.0.1",
@@ -10109,7 +10109,7 @@ checksum = "dc146eec45285b3627a1671ebf22fc1589de8b81170309c33f4ec6cff0241731"
 dependencies = [
  "impl-trait-for-tuples",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "serde",
  "smallvec",
  "sp-arithmetic 7.0.0",
@@ -10125,7 +10125,7 @@ source = "git+https://github.com/paritytech/polkadot-sdk.git?tag=polkadot-v1.9.0
 dependencies = [
  "bounded-collections",
  "parity-scale-codec 3.6.9",
- "scale-info 2.10.0",
+ "scale-info 2.11.3",
  "serde",
  "smallvec",
  "sp-arithmetic 23.0.0",
