@@ -51,26 +51,8 @@ pub trait Lending {
 }
 ```
 
-### 3. 借款模块
 
-借款模块跟踪借用的资产，并确保适当的还款机制。它帮助借款人管理他们的贷款，跟踪借款金额和借款期限。
-
-#### 接口:
-```rust
-pub trait Borrowing {
-    type AssetId;
-    type AccountId;
-    type Balance;
-    type Moment;
-
-    fn borrow(asset_id: Self::AssetId, borrower: Self::AccountId, amount: Self::Balance, duration: Self::Moment) -> DispatchResult;
-    fn repay(asset_id: Self::AssetId, borrower: Self::AccountId, amount: Self::Balance) -> DispatchResult;
-    fn get_borrowed_amount(asset_id: Self::AssetId, borrower: Self::AccountId) -> Self::Balance;
-    fn get_borrowing_duration(asset_id: Self::AssetId, borrower: Self::AccountId) -> Self::Moment;
-}
-```
-
-### 4. 跨游戏物品使用模块
+### 3. 跨游戏物品使用模块
 
 跨游戏物品使用模块确保游戏物品可以在不同游戏中使用，提高互操作性和用户体验。
 
@@ -86,7 +68,7 @@ pub trait CrossGameItemUsage {
 }
 ```
 
-### 5. 治理模块
+### 4. 治理模块
 
 治理模块允许用户参与平台的决策过程。用户可以提出变更并投票，确保去中心化控制。
 
