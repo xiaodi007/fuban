@@ -45,7 +45,32 @@ pub use sp_runtime::{Perbill, Permill};
 pub use pallet_template;
 
 /// Import the pallet_assets Pallet
-pub use pallet_assets;
+use frame_system::{self as system};
+use pallet_assets::{self as assets};
+use pallet_balances::{self as balances};
+
+impl pallet_assets::Config for Runtime {
+    type Event = Event;
+    type Balance = u128;
+    type AssetId = u32;
+    type Currency = pallet_balances::Pallet<Runtime>;
+    type ForceOrigin = frame_system::EnsureRoot<AccountId>;
+    type AssetDeposit = u128;
+    type AssetAccountDeposit = u128;
+    type MetadataDepositBase = u128;
+    type MetadataDepositPerByte = u128;
+    type ApprovalDeposit = u128;
+    type StringLimit = u32;
+    type Freezer = ();
+    type Extra = ();
+    type WeightInfo = ();
+}
+impl asset::Config for Runtime {
+    type Event = Event;
+    type Balance = u128;
+    type AssetId = u32;
+}
+
 /// Import the pallet_interest Pallet
 pub use pallet_interest;
 /// Import the pallet_lending Pallet
@@ -213,17 +238,17 @@ impl pallet_timestamp::Config for Runtime {
 	type WeightInfo = ();
 }
 
-impl pallet_assets::Config for Runtime {
-    type Event = Event;
-}
+// impl pallet_assets::Config for Runtime {
+//     type Event = Event;
+// }
 
-impl pallet_interest::Config for Runtime {
-    type Event = Event;
-}
+// impl pallet_interest::Config for Runtime {
+//     type Event = Event;
+// }
 
-impl pallet_lending::Config for Runtime {
-    type Event = Event;
-}
+// impl pallet_lending::Config for Runtime {
+//     type Event = Event;
+// }
 
 #[derive(Clone, PartialEq, Eq, Encode, Decode, RuntimeDebug, TypeInfo)]
 pub enum Event {

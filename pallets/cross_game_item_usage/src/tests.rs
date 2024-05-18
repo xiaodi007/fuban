@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate as pallet_lending;
+    use crate as pallet_cross_game_item_usage;
     use frame_support::{assert_ok, impl_outer_origin, parameter_types};
     use sp_runtime::{traits::{BlakeTwo256, IdentityLookup}, testing::Header};
     use sp_core::H256;
@@ -43,24 +43,26 @@ mod tests {
         type Event = ();
     }
 
-    type LendingModule = Module<Test>;
+    type CrossGameItemUsageModule = Module<Test>;
 
     #[test]
-    fn it_deposits_assets() {
+    fn it_registers_a_game() {
         new_test_ext().execute_with(|| {
-            // Test deposit of assets
-            assert_ok!(LendingModule::deposit(Origin::signed(1), 1, 100));
-            assert_eq!(LendingModule::deposits((1, 1)), 100);
+            // Test registration of game
+            assert_ok!(CrossGameItemUsageModule::register_game(Origin::signed(1), 1, GameMetadata { name: b"Test Game".to_vec() }));
+            assert_eq!(CrossGameItemUsageModule::get_game(1), Some(GameMetadata { name: b"Test Game".to_vec() }));
         });
     }
 
     #[test]
-    fn it_withdraws_assets() {
+    fn it_transfers_item() {
         new_test_ext().execute_with(|| {
-            // Test withdrawal of assets
-            assert_ok!(LendingModule::deposit(Origin::signed(1), 1, 100));
-            assert_ok!(LendingModule::withdraw(Origin::signed(1), 1, 50));
-            assert_eq!(LendingModule::deposits((1, 1)), 50);
+            // Test item transfer between games
+            CrossGameItemUsageModule::register_game(Origin::signed(1), 1, GameMetadata { name: b"Test Game".to_vec() }).unwrap();
+            CrossGameItemUsageModule::register_game(Origin::signed(1), 2, GameMetadata { name: b"Test Game 2".to_vec() }).unwrap();
+            CrossGameItemUsageModule::game_items((1, 1)).insert(1, 1);
+            assert_ok!(CrossGameItemUsageModule::transfer_item(Origin::signed(1), 1, 1, 2));
+            assert_eq!(CrossGameItemUsageModule::game_items((2, 1)), 1);
         });
     }
 }

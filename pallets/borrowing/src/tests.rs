@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate as pallet_lending;
+    use crate as pallet_borrowing;
     use frame_support::{assert_ok, impl_outer_origin, parameter_types};
     use sp_runtime::{traits::{BlakeTwo256, IdentityLookup}, testing::Header};
     use sp_core::H256;
@@ -43,24 +43,24 @@ mod tests {
         type Event = ();
     }
 
-    type LendingModule = Module<Test>;
+    type BorrowingModule = Module<Test>;
 
     #[test]
-    fn it_deposits_assets() {
+    fn it_borrows_assets() {
         new_test_ext().execute_with(|| {
-            // Test deposit of assets
-            assert_ok!(LendingModule::deposit(Origin::signed(1), 1, 100));
-            assert_eq!(LendingModule::deposits((1, 1)), 100);
+            // Test borrowing of assets
+            assert_ok!(BorrowingModule::borrow(Origin::signed(1), 1, 100, 10));
+            assert_eq!(BorrowingModule::loans((1, 1)), (100, 10));
         });
     }
 
     #[test]
-    fn it_withdraws_assets() {
+    fn it_repays_assets() {
         new_test_ext().execute_with(|| {
-            // Test withdrawal of assets
-            assert_ok!(LendingModule::deposit(Origin::signed(1), 1, 100));
-            assert_ok!(LendingModule::withdraw(Origin::signed(1), 1, 50));
-            assert_eq!(LendingModule::deposits((1, 1)), 50);
+            // Test repayment of assets
+            assert_ok!(BorrowingModule::borrow(Origin::signed(1), 1, 100, 10));
+            assert_ok!(BorrowingModule::repay(Origin::signed(1), 1, 50));
+            assert_eq!(BorrowingModule::loans((1, 1)), (50, 10));
         });
     }
 }

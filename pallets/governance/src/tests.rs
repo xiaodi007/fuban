@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate as pallet_lending;
+    use crate as pallet_governance;
     use frame_support::{assert_ok, impl_outer_origin, parameter_types};
     use sp_runtime::{traits::{BlakeTwo256, IdentityLookup}, testing::Header};
     use sp_core::H256;
@@ -43,24 +43,34 @@ mod tests {
         type Event = ();
     }
 
-    type LendingModule = Module<Test>;
+    type GovernanceModule = Module<Test>;
 
     #[test]
-    fn it_deposits_assets() {
+    fn it_creates_proposal() {
         new_test_ext().execute_with(|| {
-            // Test deposit of assets
-            assert_ok!(LendingModule::deposit(Origin::signed(1), 1, 100));
-            assert_eq!(LendingModule::deposits((1, 1)), 100);
+            // Test proposal creation
+            assert_ok!(GovernanceModule::propose_change(Origin::signed(1), 1, ProposalDetails { description: b"Test Proposal".to_vec() }));
+            assert_eq!(GovernanceModule::proposals(1), ProposalDetails { description: b"Test Proposal".to_vec() });
         });
     }
 
     #[test]
-    fn it_withdraws_assets() {
+    fn it_votes_on_proposal() {
         new_test_ext().execute_with(|| {
-            // Test withdrawal of assets
-            assert_ok!(LendingModule::deposit(Origin::signed(1), 1, 100));
-            assert_ok!(LendingModule::withdraw(Origin::signed(1), 1, 50));
-            assert_eq!(LendingModule::deposits((1, 1)), 50);
+            // Test voting on proposal
+            GovernanceModule::propose_change(Origin::signed(1), 1, ProposalDetails { description: b"Test Proposal".to_vec() }).unwrap();
+            assert_ok!(GovernanceModule::vote(Origin::signed(1), 1, Vote::Yes));
+            assert_eq!(GovernanceModule::votes((1, 1)), Vote::Yes);
+        });
+    }
+
+    #[test]
+    fn it_implements_proposal() {
+        new_test_ext().execute_with(|| {
+            // Test proposal implementation
+            GovernanceModule::propose_change(Origin::signed(1), 1, ProposalDetails { description: b"Test Proposal".to_vec() }).unwrap();
+            assert_ok!(GovernanceModule::implement_proposal(Origin::signed(1), 1));
+            assert!(!GovernanceModule::proposals(1).is_some());
         });
     }
 }

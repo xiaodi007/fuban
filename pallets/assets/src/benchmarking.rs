@@ -1,35 +1,35 @@
 #![cfg(feature = "runtime-benchmarks")]
 
 use super::*;
-use frame_benchmarking::{benchmarks, account};
+use frame_benchmarking::{benchmarks, whitelisted_caller};
 use frame_system::RawOrigin;
 
 benchmarks! {
-    create_asset {
-        let a in 1 .. 1000;
-        let initial_supply = 1000u32.into();
-    }: _(RawOrigin::Signed(account("test", a, SEED)), a, initial_supply)
+    register_asset {
+        let caller: T::AccountId = whitelisted_caller();
+    }: _(RawOrigin::Signed(caller), 1, AssetMetadata { name: b"Test Asset".to_vec() })
+    verify {
+        assert_eq!(Assets::<T>::get(1), Some(AssetMetadata { name: b"Test Asset".to_vec() }));
+    }
 
-    transfer_asset {
-        let a in 1 .. 1000;
-        let b = account("test", a, SEED);
-        let asset_id = a;
-        let amount = 500u32.into();
-        AssetPallet::create_asset(RawOrigin::Signed(a).into(), asset_id, 1000u32.into())?;
-    }: _(RawOrigin::Signed(a), b, asset_id, amount)
+    mint {
+        let caller: T::AccountId = whitelisted_caller();
+        let recipient: T::AccountId = whitelisted_caller();
+        Assets::<T>::insert(1, AssetMetadata { name: b"Test Asset".to_vec() });
+    }: _(RawOrigin::Signed(caller), 1, recipient.clone(), 100u32.into())
+    verify {
+        assert_eq!(Balances::<T>::get((1, recipient)), 100u32.into());
+    }
 
-    freeze_asset {
-        let a in 1 .. 1000;
-        let asset_id = a;
-        AssetPallet::create_asset(RawOrigin::Signed(a).into(), asset_id, 1000u32.into())?;
-    }: _(RawOrigin::Signed(a), asset_id)
-
-    unfreeze_asset {
-        let a in 1 .. 1000;
-        let asset_id = a;
-        AssetPallet::create_asset(RawOrigin::Signed(a).into(), asset_id, 1000u32.into())?;
-        AssetPallet::freeze_asset(RawOrigin::Signed(a).into(), asset_id)?;
-    }: _(RawOrigin::Signed(a), asset_id)
+    burn {
+        let caller: T::AccountId = whitelisted_caller();
+        let holder: T::AccountId = whitelisted_caller();
+        Assets::<T>::insert(1, AssetMetadata { name: b"Test Asset".to_vec() });
+        Balances::<T>::insert((1, holder.clone()), 100u32.into());
+    }: _(RawOrigin::Signed(caller), 1, holder.clone(), 50u32.into())
+    verify {
+        assert_eq!(Balances::<T>::get((1, holder)), 50u32.into());
+    }
 }
 
-impl_benchmark_test_suite!(Pallet, crate::mock::new_test_ext(), crate::mock::Test);
+impl_benchmark_test_suite!(AssetModule, crate::mock::new_test_ext(), crate::mock::Test);

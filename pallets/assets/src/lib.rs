@@ -1,99 +1,104 @@
 #![cfg_attr(not(feature = "std"), no_std)]
 
-pub use pallet::*;
+use frame_support::{decl_module, decl_storage, decl_event, decl_error, dispatch, traits::Get};
+use frame_system::ensure_signed;
+use sp_std::vec::Vec;
+use codec::{Decode, Encode};
+use sp_std::vec::Vec;
 
-#[frame_support::pallet]
-pub mod pallet {
-    use frame_support::{dispatch::DispatchResult, pallet_prelude::*, traits::{Currency, ReservableCurrency}};
-    use frame_system::pallet_prelude::*;
-    use sp_runtime::traits::StaticLookup;
+#[derive(Encode, Decode, Default, Clone, PartialEq, Eq)]
+pub struct AssetMetadata {
+    pub name: Vec<u8>,
+    pub symbol: Vec<u8>,
+    pub decimals: u8,
+}
+pub trait AssetManager {
+    type AssetId;
+    type AccountId;
+    type Balance;
 
-    type BalanceOf<T> = <<T as Config>::Currency as Currency<<T as frame_system::Config>::AccountId>>::Balance;
+    fn register_asset(asset_id: Self::AssetId, metadata: AssetMetadata) -> dispatch::DispatchResult;
+    fn get_asset(asset_id: Self::AssetId) -> Option<AssetMetadata>;
+    fn mint(asset_id: Self::AssetId, to: Self::AccountId, amount: Self::Balance) -> dispatch::DispatchResult;
+    fn burn(asset_id: Self::AssetId, from: Self::AccountId, amount: Self::Balance) -> dispatch::DispatchResult;
+}
 
-    #[pallet::pallet]
-    #[pallet::generate_store(pub(super) trait Store)]
-    pub struct Pallet<T>(_);
-
-    #[pallet::config]
-    pub trait Config: frame_system::Config {
-        type Event: From<Event<Self>> + IsType<<Self as frame_system::Config>::Event>;
-        type Currency: Currency<Self::AccountId> + ReservableCurrency<Self::AccountId>;
-        type AssetId: Parameter + Member + Copy + MaybeSerializeDeserialize;
+decl_storage! {
+    trait Store for Module<T: Config> as AssetModule {
+        pub Assets get(fn assets): map hasher(blake2_128_concat) T::AssetId => Option<AssetMetadata>;
+        pub Balances get(fn balances): map hasher(blake2_128_concat) (T::AssetId, T::AccountId) => T::Balance;
     }
+}
 
-    #[pallet::event]
-    #[pallet::generate_deposit(pub(super) fn deposit_event)]
-    pub enum Event<T: Config> {
-        AssetCreated(T::AccountId, T::AssetId),
-        AssetTransferred(T::AccountId, T::AccountId, T::AssetId, BalanceOf<T>),
-        AssetFrozen(T::AssetId),
-        AssetUnfrozen(T::AssetId),
+decl_module! {
+    pub struct Module<T: Config> for enum Call where origin: T::Origin {
+        fn register_asset(origin, asset_id: T::AssetId, metadata: AssetMetadata) -> dispatch::DispatchResult {
+            let _sender = ensure_signed(origin)?;
+            // Register the asset
+            <Assets<T>>::insert(asset_id, metadata);
+            Self::deposit_event(RawEvent::AssetRegistered(asset_id));
+            Ok(())
+        }
+
+        fn mint(origin, asset_id: T::AssetId, to: T::AccountId, amount: T::Balance) -> dispatch::DispatchResult {
+            let _sender = ensure_signed(origin)?;
+            // Mint the asset
+            let new_balance = Self::balances((asset_id, to.clone())).saturating_add(amount);
+            <Balances<T>>::insert((asset_id, to.clone()), new_balance);
+            Self::deposit_event(RawEvent::AssetMinted(asset_id, to, amount));
+            Ok(())
+        }
+
+        fn burn(origin, asset_id: T::AssetId, from: T::AccountId, amount: T::Balance) -> dispatch::DispatchResult {
+            let _sender = ensure_signed(origin)?;
+            // Burn the asset
+            let current_balance = Self::balances((asset_id, from.clone()));
+            let new_balance = current_balance.checked_sub(&amount).ok_or(Error::<T>::InsufficientBalance)?;
+            <Balances<T>>::insert((asset_id, from.clone()), new_balance);
+            Self::deposit_event(RawEvent::AssetBurned(asset_id, from, amount));
+            Ok(())
+        }
     }
+}
 
-    #[pallet::error]
-    pub enum Error<T> {
-        NoneValue,
-        StorageOverflow,
+decl_event!(
+    pub enum Event<T> where AccountId = <T as frame_system::Config>::AccountId, AssetId = <T as Config>::AssetId, Balance = <T as Config>::Balance {
+        AssetRegistered(AssetId),
+        AssetMinted(AssetId, AccountId, Balance),
+        AssetBurned(AssetId, AccountId, Balance),
+    }
+);
+
+decl_error! {
+    pub enum Error for Module<T: Config> {
         InsufficientBalance,
-        NotPermitted,
-        AssetFrozen,
+    }
+}
+
+impl<T: Config> AssetManager for Module<T> {
+    type AssetId = T::AssetId;
+    type AccountId = T::AccountId;
+    type Balance = T::Balance;
+
+    fn register_asset(asset_id: Self::AssetId, metadata: AssetMetadata) -> dispatch::DispatchResult {
+        <Assets<T>>::insert(asset_id, metadata);
+        Ok(())
     }
 
-    #[pallet::storage]
-    pub type Assets<T: Config> = StorageMap<_, Blake2_128Concat, T::AssetId, BalanceOf<T>, ValueQuery>;
+    fn get_asset(asset_id: Self::AssetId) -> Option<AssetMetadata> {
+        <Assets<T>>::get(asset_id)
+    }
 
-    #[pallet::storage]
-    pub type FrozenAssets<T: Config> = StorageMap<_, Blake2_128Concat, T::AssetId, bool, ValueQuery>;
+    fn mint(asset_id: Self::AssetId, to: Self::AccountId, amount: Self::Balance) -> dispatch::DispatchResult {
+        let new_balance = Self::balances((asset_id, to.clone())).saturating_add(amount);
+        <Balances<T>>::insert((asset_id, to.clone()), new_balance);
+        Ok(())
+    }
 
-    #[pallet::call]
-    impl<T: Config> Pallet<T> {
-        #[pallet::weight(10_000)]
-        pub fn create_asset(origin: OriginFor<T>, asset_id: T::AssetId, initial_supply: BalanceOf<T>) -> DispatchResult {
-            let who = ensure_signed(origin)?;
-
-            // Creating an asset with initial supply
-            Assets::<T>::insert(asset_id, initial_supply);
-            T::Currency::deposit_creating(&who, initial_supply);
-
-            Self::deposit_event(Event::AssetCreated(who, asset_id));
-            Ok(())
-        }
-
-        #[pallet::weight(10_000)]
-        pub fn transfer_asset(origin: OriginFor<T>, to: T::AccountId, asset_id: T::AssetId, amount: BalanceOf<T>) -> DispatchResult {
-            let who = ensure_signed(origin)?;
-
-            // Check if asset is frozen
-            ensure!(!FrozenAssets::<T>::get(&asset_id), Error::<T>::AssetFrozen);
-
-            // Logic to transfer assets
-            T::Currency::transfer(&who, &to, amount, ExistenceRequirement::KeepAlive)?;
-
-            Self::deposit_event(Event::AssetTransferred(who, to, asset_id, amount));
-            Ok(())
-        }
-
-        #[pallet::weight(10_000)]
-        pub fn freeze_asset(origin: OriginFor<T>, asset_id: T::AssetId) -> DispatchResult {
-            let who = ensure_signed(origin)?;
-
-            // Ensure only the asset creator can freeze it (simplified permission check)
-            ensure!(Assets::<T>::contains_key(&asset_id), Error::<T>::NotPermitted);
-
-            FrozenAssets::<T>::insert(asset_id, true);
-            Self::deposit_event(Event::AssetFrozen(asset_id));
-            Ok(())
-        }
-
-        #[pallet::weight(10_000)]
-        pub fn unfreeze_asset(origin: OriginFor<T>, asset_id: T::AssetId) -> DispatchResult {
-            let who = ensure_signed(origin)?;
-
-            ensure!(Assets::<T>::contains_key(&asset_id), Error::<T>::NotPermitted);
-
-            FrozenAssets::<T>::insert(asset_id, false);
-            Self::deposit_event(Event::AssetUnfrozen(asset_id));
-            Ok(())
-        }
+    fn burn(asset_id: Self::AssetId, from: Self::AccountId, amount: Self::Balance) -> dispatch::DispatchResult {
+        let current_balance = Self::balances((asset_id, from.clone()));
+        let new_balance = current_balance.checked_sub(&amount).ok_or(Error::<T>::InsufficientBalance)?;
+        <Balances<T>>::insert((asset_id, from.clone()), new_balance);
+        Ok(())
     }
 }
